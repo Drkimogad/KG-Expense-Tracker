@@ -28,7 +28,7 @@ function showSignIn() {
         event.preventDefault();
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
-        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const users = JSON.parse(localStorage.getItem('users') || '[]');
         const user = users.find(user => user.email === email && user.password === password);
 
         if (user) {
@@ -60,7 +60,7 @@ function showSignUp() {
         event.preventDefault();
         const newEmail = document.getElementById('newEmail').value;
         const newPassword = document.getElementById('newPassword').value;
-        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const users = JSON.parse(localStorage.getItem('users') || '[]');
 
         if (users.some(user => user.email === newEmail)) {
             alert('Email already exists');
@@ -85,7 +85,7 @@ function showDashboard() {
     const content = document.getElementById('content');
     content.innerHTML = `
         <h1>Expense Tracker</h1>
-        <div id="expense-form">
+        <form id="expense-form">
             <input type="text" id="expense-name" placeholder="Expense Name" required>
             <input type="number" id="expense-amount" placeholder="Amount" required>
             <input type="date" id="expense-date" required>
@@ -102,8 +102,8 @@ function showDashboard() {
                 <option value="shopping">Shopping</option>
                 <option value="subscriptions">Subscriptions</option>
             </select>
-            <button type="submit" id="submit-expense">Add Expense</button>
-        </div>
+            <button type="submit">Add Expense</button>
+        </form>
         <h2>Expenses</h2>
         <ul id="expenseList"></ul>
         <h2>Total Expenses: $<span id="totalExpense">0</span></h2>
@@ -112,22 +112,22 @@ function showDashboard() {
         <button id="exportCsv">Export to CSV</button>
     `;
     
-    document.getElementById('expenseForm').addEventListener('submit', function(event) {
+    document.getElementById('expense-form').addEventListener('submit', function(event) {
         event.preventDefault();
-        const expenseName = document.getElementById('expenseName').value;
-        const expenseAmount = parseFloat(document.getElementById('expenseAmount').value);
-        const expenseCategory = document.getElementById('expenseCategory').value;
+        const expenseName = document.getElementById('expense-name').value;
+        const expenseAmount = parseFloat(document.getElementById('expense-amount').value);
+        const expenseCategory = document.getElementById('expense-category').value;
 
         if (!expenseName || isNaN(expenseAmount) || expenseAmount <= 0) {
             alert('Please enter valid expense details');
             return;
         }
 
-        const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+        const expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
         expenses.push({ expenseName, expenseAmount, expenseCategory });
         localStorage.setItem('expenses', JSON.stringify(expenses));
 
-        document.getElementById('expenseForm').reset();
+        document.getElementById('expense-form').reset();
         displayExpenses();
     });
 
@@ -141,7 +141,7 @@ function displayExpenses() {
     const totalExpenseElem = document.getElementById('totalExpense');
     const categoryBreakdownElem = document.getElementById('categoryBreakdown');
     
-    const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+    const expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
     let totalExpense = 0;
     const categoryBreakdown = {};
 
@@ -171,12 +171,12 @@ function displayExpenses() {
 
 // Edit an expense
 function editExpense(index) {
-    const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+    const expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
     const expense = expenses[index];
 
-    document.getElementById('expenseName').value = expense.expenseName;
-    document.getElementById('expenseAmount').value = expense.expenseAmount;
-    document.getElementById('expenseCategory').value = expense.expenseCategory;
+    document.getElementById('expense-name').value = expense.expenseName;
+    document.getElementById('expense-amount').value = expense.expenseAmount;
+    document.getElementById('expense-category').value = expense.expenseCategory;
 
     expenses.splice(index, 1);
     localStorage.setItem('expenses', JSON.stringify(expenses));
@@ -186,7 +186,7 @@ function editExpense(index) {
 // Delete an expense
 function deleteExpense(index) {
     if (confirm("Are you sure you want to delete this expense?")) {
-        const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+        const expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
         expenses.splice(index, 1);
         localStorage.setItem('expenses', JSON.stringify(expenses));
         displayExpenses();
@@ -195,7 +195,7 @@ function deleteExpense(index) {
 
 // Export Expenses to CSV
 function exportExpensesToCSV() {
-    const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+    const expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
     let csvContent = "Expense Name,Amount,Category\n";
 
     expenses.forEach(expense => {
