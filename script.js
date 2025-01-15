@@ -30,7 +30,7 @@ function showSignIn() {
         const password = document.getElementById('password').value;
         const users = JSON.parse(localStorage.getItem('users')) || [];
         const user = users.find(user => user.email === email && user.password === password);
-        
+
         if (user) {
             localStorage.setItem('loggedIn', 'true');
             localStorage.setItem('currentUser', JSON.stringify(user));
@@ -104,6 +104,7 @@ function showDashboard() {
         <h2>Total Expenses: $<span id="totalExpense">0</span></h2>
         <h2>Category Breakdown:</h2>
         <div id="categoryBreakdown"></div>
+        <button id="exportCsv">Export to CSV</button>
     `;
     
     document.getElementById('expenseForm').addEventListener('submit', function(event) {
@@ -126,6 +127,7 @@ function showDashboard() {
     });
 
     displayExpenses();
+    document.getElementById('exportCsv').addEventListener('click', exportExpensesToCSV);
 }
 
 // Display expenses in the dashboard
@@ -178,10 +180,28 @@ function editExpense(index) {
 
 // Delete an expense
 function deleteExpense(index) {
+    if (confirm("Are you sure you want to delete this expense?")) {
+        const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+        expenses.splice(index, 1);
+        localStorage.setItem('expenses', JSON.stringify(expenses));
+        displayExpenses();
+    }
+}
+
+// Export Expenses to CSV
+function exportExpensesToCSV() {
     const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
-    expenses.splice(index, 1);
-    localStorage.setItem('expenses', JSON.stringify(expenses));
-    displayExpenses();
+    let csvContent = "Expense Name,Amount,Category\n";
+
+    expenses.forEach(expense => {
+        csvContent += `${expense.expenseName},${expense.expenseAmount},${expense.expenseCategory}\n`;
+    });
+
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'expenses.csv';
+    link.click();
 }
 
 // Initialize the app
