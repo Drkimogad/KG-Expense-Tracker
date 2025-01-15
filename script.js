@@ -85,20 +85,25 @@ function showDashboard() {
     const content = document.getElementById('content');
     content.innerHTML = `
         <h1>Expense Tracker</h1>
-        <form id="expenseForm">
-            <label for="expenseName">Expense Name:</label>
-            <input type="text" id="expenseName" required>
-            <label for="expenseAmount">Amount:</label>
-            <input type="number" id="expenseAmount" required>
-            <label for="expenseCategory">Category:</label>
-            <select id="expenseCategory" required>
-                <option value="groceries">Groceries</option>
-                <option value="entertainment">Entertainment</option>
+        <div id="expense-form">
+            <input type="text" id="expense-name" placeholder="Expense Name" required>
+            <input type="number" id="expense-amount" placeholder="Amount" required>
+            <input type="date" id="expense-date" required>
+            
+            <select id="expense-category">
                 <option value="bills">Bills</option>
-                <option value="others">Others</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="groceries">Groceries</option>
+                <option value="vacations">Vacations</option>
+                <option value="schools">Schools</option>
+                <option value="transportation">Transportation</option>
+                <option value="healthcare">Healthcare</option>
+                <option value="dining-out">Dining Out</option>
+                <option value="shopping">Shopping</option>
+                <option value="subscriptions">Subscriptions</option>
             </select>
-            <button type="submit">Add Expense</button>
-        </form>
+            <button type="submit" id="submit-expense">Add Expense</button>
+        </div>
         <h2>Expenses</h2>
         <ul id="expenseList"></ul>
         <h2>Total Expenses: $<span id="totalExpense">0</span></h2>
