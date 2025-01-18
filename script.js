@@ -100,7 +100,9 @@ function showDashboard() {
                 <option value="school">School</option>
                 <option value="entertainment">Entertainment</option>
                 <option value="groceries">Groceries</option>
-                <option value="medical">Medical</option>
+                <option value="healthcare">Healthcare</option>
+                <option value="dining-out">Dining Out</option>
+                <option value="shopping">Shopping</option>                
                 <option value="vacations">Vacations</option>
                 <option value="transportation">Transportation</option>
             </select>
