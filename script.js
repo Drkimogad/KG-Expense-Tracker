@@ -103,6 +103,8 @@ function showDashboard() {
                 <option value="healthcare">Healthcare</option>
                 <option value="dining-out">Dining Out</option>
                 <option value="shopping">Shopping</option>
+                <option value="zar">South African Rands (ZAR)</option>
+                <option value="egp">Egyptian Pounds (EGP)</option>
             </select>
             <button type="submit">Add Expense</button>
         </form>
@@ -158,8 +160,4 @@ function logout() {
 }
 
 // Initialize the app
-if (isLoggedIn()) {
-    showDashboard();
-} else {
-    showSignIn();
-}
+showSignUp();
