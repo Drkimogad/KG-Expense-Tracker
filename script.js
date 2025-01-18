@@ -100,16 +100,14 @@ function showDashboard() {
                 <option value="school">School</option>
                 <option value="entertainment">Entertainment</option>
                 <option value="groceries">Groceries</option>
-                <option value="healthcare">Healthcare</option>
-                <option value="dining-out">Dining Out</option>
-                <option value="shopping">Shopping</option>                
                 <option value="vacations">Vacations</option>
                 <option value="transportation">Transportation</option>
             </select>
-            <select id="currency">
-                <option value="USD">USD</option>
-                <option value="EUR">EUR</option>
-                <option value="GBP">GBP</option>
+            <select id="expenseCurrency">
+                <option value="USD">$ USD</option>
+                <option value="EUR">€ EUR</option>
+                <option value="GBP">£ GBP</option>
+                <option value="INR">₹ INR</option>
                 <option value="ZAR">South African Rand</option>
                 <option value="EGP">Egyptian Pound</option>
             </select>
@@ -121,7 +119,10 @@ function showDashboard() {
         <ul id="expenseList"></ul>
 
         <!-- Total Expenses -->
-        <h2>Total Expenses: $<span id="totalExpense">0</span></h2>
+        <h2>Total Expenses: <span id="totalExpense">0</span></h2>
+
+        <!-- Export Button -->
+        <button onclick="exportExpenses()">Export Expenses as CSV</button>
     `;
 
     // Display saved expenses
@@ -134,8 +135,9 @@ function showDashboard() {
         const expenseAmount = document.getElementById('expenseAmount').value.trim();
         const expenseDate = document.getElementById('expenseDate').value;
         const expenseCategory = document.getElementById('expenseCategory').value;
+        const expenseCurrency = document.getElementById('expenseCurrency').value;
 
-        const expense = { name: expenseName, amount: expenseAmount, date: expenseDate, category: expenseCategory };
+        const expense = { name: expenseName, amount: expenseAmount, date: expenseDate, category: expenseCategory, currency: expenseCurrency };
         expenses.push(expense);
         localStorage.setItem('expenses', JSON.stringify(expenses));
 
@@ -152,12 +154,25 @@ function renderExpenseList() {
     expenses.forEach((expense, index) => {
         const li = document.createElement('li');
         li.innerHTML = `
-            <strong>${expense.name}</strong> - $${expense.amount} - ${expense.category} 
+            <strong>${expense.name}</strong> - ${getCurrencySymbol(expense.currency)} ${expense.amount} - ${expense.category} 
             <button onclick="deleteExpense(${index})">Delete</button>
             <button onclick="editExpense(${index})">Edit</button>
         `;
         expenseList.appendChild(li);
     });
+}
+
+// Get currency symbol based on selected currency
+function getCurrencySymbol(currency) {
+    switch (currency) {
+        case 'USD': return '$';
+        case 'EUR': return '€';
+        case 'GBP': return '£';
+        case 'INR': return '₹';
+        case 'ZAR': return 'R';
+        case 'EGP': return 'P';
+        default: return '$';
+    }
 }
 
 // Update the total expenses displayed
@@ -181,6 +196,7 @@ function editExpense(index) {
     document.getElementById('expenseAmount').value = expense.amount;
     document.getElementById('expenseDate').value = expense.date;
     document.getElementById('expenseCategory').value = expense.category;
+    document.getElementById('expenseCurrency').value = expense.currency;
     
     // Remove the expense and update form to edit
     deleteExpense(index);
@@ -192,6 +208,31 @@ function logout() {
     localStorage.removeItem('currentUser');
     alert('You have logged out.');
     showSignIn(); // Redirect to sign-in page
+}
+
+// Export expenses to CSV
+function exportExpenses() {
+    const csvRows = [];
+    const headers = ['Expense Name', 'Amount', 'Date', 'Category', 'Currency'];
+    csvRows.push(headers.join(','));
+
+    expenses.forEach(expense => {
+        const row = [
+            expense.name,
+            `${getCurrencySymbol(expense.currency)} ${expense.amount}`,
+            expense.date,
+            expense.category,
+            expense.currency
+        ];
+        csvRows.push(row.join(','));
+    });
+
+    const csvData = new Blob([csvRows.join('\n')], { type: 'text/csv' });
+    const csvUrl = URL.createObjectURL(csvData);
+    const a = document.createElement('a');
+    a.href = csvUrl;
+    a.download = 'expenses.csv';
+    a.click();
 }
 
 // Show the appropriate page when the app starts
