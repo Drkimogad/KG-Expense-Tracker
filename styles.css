@@ -95,7 +95,7 @@ button:hover {
     background-color: #ff4d4d;
 }
 
-/* Styling for the Logout Button */
+/* Styling for the Logout Button (Only for bottom right corner) */
 #logout-btn {
     position: fixed;
     bottom: 20px;
@@ -107,8 +107,8 @@ button:hover {
     border-radius: 5px;
     border: none;
     cursor: pointer;
-    z-index: 1000;
     transition: background-color 0.3s;
+    display: block; /* Make sure it's visible */
 }
 
 #logout-btn:hover {
