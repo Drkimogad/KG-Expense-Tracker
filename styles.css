@@ -71,18 +71,30 @@ footer {
 
 /* Styling for the Logout Button */
 #logout-btn {
-    position: absolute;  /* Positioning the button */
-    top: 20px;           /* Space from the top */
-    right: 20px;         /* Space from the right */
-    background-color: #ff4d4d;  /* Red background */
+    position: fixed;
+    background-color: #ffcccc; /* Light red background */
     color: white;
     font-size: 16px;
     padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    z-index: 1000; /* Ensure it stays on top */
+    display: none; /* Hidden by default */
+    transition: background-color 0.3s, opacity 0.3s;
 }
 
+/* Hover effect */
 #logout-btn:hover {
-    background-color: #e03e3e;  /* Darker red on hover */
+    background-color: #ff9999; /* Darker red on hover */
 }
+
+/* Bottom-right corner */
+#logout-btn.bottom-right {
+    bottom: 20px;
+    right: 20px;
+}
+
 
 #expense-container {
     padding-top: 40px; /* Space for the logout button */
