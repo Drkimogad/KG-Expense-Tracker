@@ -1,4 +1,5 @@
 let currentUser = null;
+let expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
 
 // Helper functions for login state
 function isLoggedIn() {
@@ -9,7 +10,7 @@ function getLoggedInUser() {
     return JSON.parse(localStorage.getItem('currentUser'));
 }
 
-// Render Sign-Up page (default starting page)
+// Render Sign-Up page (redirect to Sign-In after signup)
 function showSignUp() {
     const content = document.getElementById('content');
     content.innerHTML = `
@@ -35,10 +36,8 @@ function showSignUp() {
         } else {
             users.push({ email: newEmail, password: newPassword });
             localStorage.setItem('users', JSON.stringify(users));
-            localStorage.setItem('loggedIn', 'true');
-            localStorage.setItem('currentUser', JSON.stringify({ email: newEmail }));
-            alert('Sign-up successful! You are now logged in.');
-            showDashboard();  // Automatically redirect to Dashboard after sign-up
+            alert('Sign-up successful! Please sign in.');
+            showSignIn(); // Redirect to sign-in after successful sign-up
         }
     });
 }
@@ -77,10 +76,10 @@ function showSignIn() {
     });
 }
 
-// Render the Dashboard
+// Render the Dashboard (with expense list and functionalities)
 function showDashboard() {
     if (!isLoggedIn()) {
-        showSignIn();  // If not logged in, redirect to sign-in
+        showSignIn();
         return;
     }
 
@@ -90,74 +89,104 @@ function showDashboard() {
         <h1>Welcome, ${currentUser.email}</h1>
         <button onclick="logout()">Log Out</button>
         <h2>Expense Tracker</h2>
+        
+        <!-- Add Expense Form -->
         <form id="expenseForm">
             <input type="text" id="expenseName" placeholder="Expense Name" required>
             <input type="number" id="expenseAmount" placeholder="Amount" required>
             <input type="date" id="expenseDate" required>
-            
-            <select id="currency">
-                <option value="USD">USD</option>
-                <option value="EUR">EUR</option>
-                <option value="GBP">GBP</option>
-                <option value="ZAR">South African Rand</option>
-                <option value="EGP">Egyptian Pound</option>
+            <select id="expenseCategory">
+                <option value="bills">Bills</option>
+                <option value="school">School</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="groceries">Groceries</option>
+                <option value="vacations">Vacations</option>
+                <option value="transportation">Transportation</option>
             </select>
             <button type="submit">Add Expense</button>
         </form>
+
+        <!-- Expense List -->
         <h2>Expenses</h2>
         <ul id="expenseList"></ul>
+
+        <!-- Total Expenses -->
         <h2>Total Expenses: $<span id="totalExpense">0</span></h2>
     `;
 
+    // Display saved expenses
+    renderExpenseList();
+
+    // Add expense functionality
     document.getElementById('expenseForm').addEventListener('submit', function (event) {
         event.preventDefault();
         const expenseName = document.getElementById('expenseName').value.trim();
-        const expenseAmount = parseFloat(document.getElementById('expenseAmount').value);
-        const expenseCategory = document.getElementById('currency').value;
+        const expenseAmount = document.getElementById('expenseAmount').value.trim();
+        const expenseDate = document.getElementById('expenseDate').value;
+        const expenseCategory = document.getElementById('expenseCategory').value;
 
-        if (!expenseName || isNaN(expenseAmount) || expenseAmount <= 0) {
-            alert('Please enter valid expense details.');
-            return;
-        }
-
-        const expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
-        expenses.push({ expenseName, expenseAmount, expenseCategory });
+        const expense = { name: expenseName, amount: expenseAmount, date: expenseDate, category: expenseCategory };
+        expenses.push(expense);
         localStorage.setItem('expenses', JSON.stringify(expenses));
-        document.getElementById('expenseForm').reset();
-        displayExpenses();
-    });
 
-    displayExpenses();
+        renderExpenseList();
+        updateTotalExpenses();
+    });
 }
 
-// Display expenses in the dashboard
-function displayExpenses() {
+// Render the expense list
+function renderExpenseList() {
     const expenseList = document.getElementById('expenseList');
-    const totalExpenseElem = document.getElementById('totalExpense');
-    const expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
-    let totalExpense = 0;
+    expenseList.innerHTML = ''; // Clear current list
 
-    expenseList.innerHTML = '';
-    expenses.forEach(expense => {
-        totalExpense += expense.expenseAmount;
+    expenses.forEach((expense, index) => {
         const li = document.createElement('li');
-        li.textContent = `${expense.expenseName} - $${expense.expenseAmount} (${expense.expenseCategory})`;
+        li.innerHTML = `
+            <strong>${expense.name}</strong> - $${expense.amount} - ${expense.category} 
+            <button onclick="deleteExpense(${index})">Delete</button>
+            <button onclick="editExpense(${index})">Edit</button>
+        `;
         expenseList.appendChild(li);
     });
-
-    totalExpenseElem.textContent = totalExpense.toFixed(2);
 }
 
-// Log out the user
+// Update the total expenses displayed
+function updateTotalExpenses() {
+    const total = expenses.reduce((sum, expense) => sum + parseFloat(expense.amount), 0);
+    document.getElementById('totalExpense').textContent = total.toFixed(2);
+}
+
+// Delete expense functionality
+function deleteExpense(index) {
+    expenses.splice(index, 1);
+    localStorage.setItem('expenses', JSON.stringify(expenses));
+    renderExpenseList();
+    updateTotalExpenses();
+}
+
+// Edit expense functionality
+function editExpense(index) {
+    const expense = expenses[index];
+    document.getElementById('expenseName').value = expense.name;
+    document.getElementById('expenseAmount').value = expense.amount;
+    document.getElementById('expenseDate').value = expense.date;
+    document.getElementById('expenseCategory').value = expense.category;
+    
+    // Remove the expense and update form to edit
+    deleteExpense(index);
+}
+
+// Log out functionality
 function logout() {
     localStorage.removeItem('loggedIn');
     localStorage.removeItem('currentUser');
-    showSignIn();
+    alert('You have logged out.');
+    showSignIn(); // Redirect to sign-in page
 }
 
-// Initialize the app (start with Sign-Up page if not logged in, else Dashboard)
+// Show the appropriate page when the app starts
 if (isLoggedIn()) {
     showDashboard();
 } else {
-    showSignUp();
+    showSignIn();
 }
