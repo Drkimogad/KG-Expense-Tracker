@@ -1,4 +1,4 @@
-let currentUser = null; // For keeping track of the logged-in user
+let currentUser = null;
 
 // Helper functions for login state
 function isLoggedIn() {
@@ -7,6 +7,40 @@ function isLoggedIn() {
 
 function getLoggedInUser() {
     return JSON.parse(localStorage.getItem('currentUser'));
+}
+
+// Render Sign-Up page (default starting page)
+function showSignUp() {
+    const content = document.getElementById('content');
+    content.innerHTML = `
+        <h1>Sign Up</h1>
+        <form id="signUpForm">
+            <label for="newEmail">Email:</label>
+            <input type="email" id="newEmail" required>
+            <label for="newPassword">Password:</label>
+            <input type="password" id="newPassword" required>
+            <button type="submit">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="#" onclick="showSignIn()">Sign In</a></p>
+    `;
+
+    document.getElementById('signUpForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+        const newEmail = document.getElementById('newEmail').value.trim();
+        const newPassword = document.getElementById('newPassword').value.trim();
+        const users = JSON.parse(localStorage.getItem('users') || '[]');
+
+        if (users.some(user => user.email === newEmail)) {
+            alert('Email already exists. Please use a different email.');
+        } else {
+            users.push({ email: newEmail, password: newPassword });
+            localStorage.setItem('users', JSON.stringify(users));
+            localStorage.setItem('loggedIn', 'true');
+            localStorage.setItem('currentUser', JSON.stringify({ email: newEmail }));
+            alert('Sign-up successful! You are now logged in.');
+            showDashboard();
+        }
+    });
 }
 
 // Render Sign-In page
@@ -43,40 +77,6 @@ function showSignIn() {
     });
 }
 
-// Render Sign-Up page
-function showSignUp() {
-    const content = document.getElementById('content');
-    content.innerHTML = `
-        <h1>Sign Up</h1>
-        <form id="signUpForm">
-            <label for="newEmail">Email:</label>
-            <input type="email" id="newEmail" required>
-            <label for="newPassword">Password:</label>
-            <input type="password" id="newPassword" required>
-            <button type="submit">Sign Up</button>
-        </form>
-        <p>Already have an account? <a href="#" onclick="showSignIn()">Sign In</a></p>
-    `;
-
-    document.getElementById('signUpForm').addEventListener('submit', function (event) {
-        event.preventDefault();
-        const newEmail = document.getElementById('newEmail').value.trim();
-        const newPassword = document.getElementById('newPassword').value.trim();
-        const users = JSON.parse(localStorage.getItem('users') || '[]');
-
-        if (users.some(user => user.email === newEmail)) {
-            alert('Email already exists. Please use a different email.');
-        } else {
-            users.push({ email: newEmail, password: newPassword });
-            localStorage.setItem('users', JSON.stringify(users));
-            localStorage.setItem('loggedIn', 'true');
-            localStorage.setItem('currentUser', JSON.stringify({ email: newEmail }));
-            alert('Sign-up successful! You are now logged in.');
-            showDashboard();
-        }
-    });
-}
-
 // Render the Dashboard
 function showDashboard() {
     if (!isLoggedIn()) {
@@ -95,16 +95,12 @@ function showDashboard() {
             <input type="number" id="expenseAmount" placeholder="Amount" required>
             <input type="date" id="expenseDate" required>
             
-            <select id="expenseCategory">
-                <option value="bills">Bills</option>
-                <option value="entertainment">Entertainment</option>
-                <option value="groceries">Groceries</option>
-                <option value="transportation">Transportation</option>
-                <option value="healthcare">Healthcare</option>
-                <option value="dining-out">Dining Out</option>
-                <option value="shopping">Shopping</option>
-                <option value="zar">South African Rands (ZAR)</option>
-                <option value="egp">Egyptian Pounds (EGP)</option>
+            <select id="currency">
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option value="ZAR">South African Rand</option>
+                <option value="EGP">Egyptian Pound</option>
             </select>
             <button type="submit">Add Expense</button>
         </form>
@@ -117,7 +113,7 @@ function showDashboard() {
         event.preventDefault();
         const expenseName = document.getElementById('expenseName').value.trim();
         const expenseAmount = parseFloat(document.getElementById('expenseAmount').value);
-        const expenseCategory = document.getElementById('expenseCategory').value;
+        const expenseCategory = document.getElementById('currency').value;
 
         if (!expenseName || isNaN(expenseAmount) || expenseAmount <= 0) {
             alert('Please enter valid expense details.');
@@ -159,5 +155,9 @@ function logout() {
     showSignIn();
 }
 
-// Initialize the app
-showSignUp();
+// Initialize the app (start with Sign-Up page)
+if (isLoggedIn()) {
+    showDashboard();
+} else {
+    showSignUp();
+}
