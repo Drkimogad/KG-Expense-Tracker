@@ -1,68 +1,107 @@
-/* Basic Styles for Expense Tracker */
+/* General Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
 }
 
-h1, h2 {
+#expense-container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    position: relative; /* To position logout button */
+}
+
+h1 {
+    color: #4CAF50;
+    font-size: 24px;
     text-align: center;
-    color: #333;
-}
-
-#content {
-    width: 80%;
-    margin: auto;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
     margin-bottom: 20px;
 }
 
-input[type="text"],
-input[type="number"],
-select {
-    padding: 10px;
-    margin-bottom: 10px;
+input, select, button {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
 }
 
 button {
-    padding: 10px;
     background-color: #4CAF50;
     color: white;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
 }
 
 button:hover {
     background-color: #45a049;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
+#expense-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-li {
-    background-color: #fff;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
+.expense-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-button.delete {
-    background-color: #f44336;
+footer {
+    text-align: center;
+    font-size: 14px;
+    color: #888;
+    margin-top: 30px;
 }
 
-button.edit {
-    background-color: #ff9800;
+/* Styling for the Logout Button */
+#logout-btn {
+    position: absolute;  /* Positioning the button */
+    top: 20px;           /* Space from the top */
+    right: 20px;         /* Space from the right */
+    background-color: #ff4d4d;  /* Red background */
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+}
+
+#logout-btn:hover {
+    background-color: #e03e3e;  /* Darker red on hover */
+}
+
+#expense-container {
+    padding-top: 40px; /* Space for the logout button */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    /* For smaller screens */
+    #logout-btn {
+        top: 10px; /* Adjust top position */
+        right: 10px; /* Adjust right position */
+        font-size: 14px; /* Smaller text */
+    }
+
+    #expense-container {
+        padding: 10px; /* Reduce padding on small screens */
+    }
+
+    button {
+        width: 100%; /* Make buttons full-width */
+    }
 }
