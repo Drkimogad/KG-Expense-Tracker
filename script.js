@@ -38,7 +38,7 @@ function showSignUp() {
             localStorage.setItem('loggedIn', 'true');
             localStorage.setItem('currentUser', JSON.stringify({ email: newEmail }));
             alert('Sign-up successful! You are now logged in.');
-            showDashboard();
+            showDashboard();  // Automatically redirect to Dashboard after sign-up
         }
     });
 }
@@ -80,7 +80,7 @@ function showSignIn() {
 // Render the Dashboard
 function showDashboard() {
     if (!isLoggedIn()) {
-        showSignIn();
+        showSignIn();  // If not logged in, redirect to sign-in
         return;
     }
 
@@ -155,7 +155,7 @@ function logout() {
     showSignIn();
 }
 
-// Initialize the app (start with Sign-Up page)
+// Initialize the app (start with Sign-Up page if not logged in, else Dashboard)
 if (isLoggedIn()) {
     showDashboard();
 } else {
