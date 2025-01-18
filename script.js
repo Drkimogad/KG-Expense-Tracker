@@ -100,8 +100,16 @@ function showDashboard() {
                 <option value="school">School</option>
                 <option value="entertainment">Entertainment</option>
                 <option value="groceries">Groceries</option>
+                <option value="medical">Medical</option>
                 <option value="vacations">Vacations</option>
                 <option value="transportation">Transportation</option>
+            </select>
+            <select id="currency">
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option value="ZAR">South African Rand</option>
+                <option value="EGP">Egyptian Pound</option>
             </select>
             <button type="submit">Add Expense</button>
         </form>
