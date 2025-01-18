@@ -10,6 +10,14 @@ function getLoggedInUser() {
     return JSON.parse(localStorage.getItem('currentUser'));
 }
 
+// UPDATED: Function to toggle logout button visibility
+function toggleLogoutButton(show) {
+    const logoutButton = document.getElementById('logoutButton');
+    if (logoutButton) {
+        logoutButton.style.display = show ? 'block' : 'none';
+    }
+}
+
 // Render Sign-Up page (redirect to Sign-In after signup)
 function showSignUp() {
     const content = document.getElementById('content');
@@ -24,6 +32,7 @@ function showSignUp() {
         </form>
         <p>Already have an account? <a href="#" onclick="showSignIn()">Sign In</a></p>
     `;
+    toggleLogoutButton(false); // UPDATED: Hide logout button on sign-up page
 
     document.getElementById('signUpForm').addEventListener('submit', function (event) {
         event.preventDefault();
@@ -56,6 +65,7 @@ function showSignIn() {
         </form>
         <p>Don't have an account? <a href="#" onclick="showSignUp()">Sign Up</a></p>
     `;
+    toggleLogoutButton(false); // UPDATED: Hide logout button on sign-in page
 
     document.getElementById('signInForm').addEventListener('submit', function (event) {
         event.preventDefault();
@@ -87,7 +97,7 @@ function showDashboard() {
     const content = document.getElementById('content');
     content.innerHTML = `
         <h1>Welcome, ${currentUser.email}</h1>
-        <button onclick="logout()">Log Out</button>
+        <button id="logoutButton" onclick="logout()">Log Out</button>
         <h2>Expense Tracker</h2>
         
         <!-- Add Expense Form -->
@@ -128,6 +138,13 @@ function showDashboard() {
         <button onclick="exportExpenses()">Export Expenses as CSV</button>
     `;
 
+    // UPDATED: Show and reposition logout button
+    const logoutButton = document.getElementById('logoutButton');
+    logoutButton.style.position = 'fixed';
+    logoutButton.style.top = '10px'; // Adjust this for top-right corner
+    logoutButton.style.right = '10px'; // Adjust this for right corner
+    toggleLogoutButton(true);
+
     // Display saved expenses
     renderExpenseList();
 
@@ -148,6 +165,7 @@ function showDashboard() {
         updateTotalExpenses();
     });
 }
+
 
 // Render the expense list
 function renderExpenseList() {
