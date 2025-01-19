@@ -135,6 +135,9 @@ function showDashboard() {
 
         <!-- Export Button -->
         <button onclick="exportExpenses()">Export Expenses as CSV</button>
+
+        <!-- Logout Button -->
+        <button id="logoutButton" onclick="logout()">Log Out</button>
     `;
 
     // UPDATED: Show and reposition logout button
