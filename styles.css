@@ -70,19 +70,48 @@ footer {
 }
 
 /* Styling for the Logout Button */
-#logout-btn {
-    position: absolute;  /* Positioning the button */
-    top: 20px;           /* Space from the top */
-    right: 20px;         /* Space from the right */
-    background-color: #ff4d4d;  /* Red background */
+/* Logout Button - Only for Dashboard */
+#logoutButton {
+    background-color: #ffcccc;
     color: white;
     font-size: 16px;
     padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    display: none; /* Initially hidden */
+    transition: background-color 0.3s, opacity 0.3s;
+    position: absolute;
+    bottom: 30px; /* Position at the bottom */
+    left: 50%;
+    transform: translateX(-50%);
 }
 
-#logout-btn:hover {
-    background-color: #e03e3e;  /* Darker red on hover */
+/* Show only on dashboard */
+.dashboard #logoutButton {
+    display: block;
 }
+
+/* Action Buttons (Edit, Delete, Export) */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.action-buttons button {
+    width: 20%; /* Reduce size to 20% */
+    font-size: 12px;
+    padding: 8px;
+    text-align: center;
+    border: 1px solid transparent; /* Default transparent */
+    cursor: pointer;
+    transition: border 0.3s ease;
+}
+
+.action-buttons button:active {
+    border: 1px solid white; /* White border on click */
+}
+
 
 #expense-container {
     padding-top: 40px; /* Space for the logout button */
@@ -102,6 +131,6 @@ footer {
     }
 
     button {
-        width: 60%; /* Make buttons full-width */
+        width: 100%; /* Make buttons full-width */
     }
 }
