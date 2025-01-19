@@ -14,7 +14,7 @@ body {
     background-color: #fff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    position: relative; /* To position logout button */
+    position: relative;
 }
 
 h1 {
@@ -29,14 +29,14 @@ input, select, button {
     padding: 12px;
     margin: 10px 0;
     border-radius: 5px;
-    border: 1px solid #ddd;
+    border: 1px solid white; /* White border for all buttons */
     box-sizing: border-box;
 }
 
 button {
     background-color: #4CAF50;
     color: white;
-    border: none;
+    border: 1px solid white; /* White border */
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s;
@@ -46,6 +46,7 @@ button:hover {
     background-color: #45a049;
 }
 
+/* Expense List */
 #expense-list {
     display: flex;
     flex-direction: column;
@@ -62,6 +63,27 @@ button:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.expense-item .action-buttons {
+    display: flex;
+    gap: 10px; /* Spacing between buttons */
+    justify-content: flex-end; /* Align buttons to the right */
+}
+
+.action-btn {
+    width: 20%; /* Reduce size to 20% */
+    font-size: 12px; /* Smaller text size */
+    padding: 8px; /* Adjust padding */
+    border: 1px solid white; /* White border */
+    background-color: #f44336; /* Red background for delete */
+    color: white;
+    border-radius: 5px;
+    text-align: center; /* Center-align text */
+}
+
+.action-btn:hover {
+    background-color: #e53935; /* Darker red on hover */
+}
+
 footer {
     text-align: center;
     font-size: 14px;
@@ -69,50 +91,17 @@ footer {
     margin-top: 30px;
 }
 
-/* Styling for the Logout Button */
-#logout-btn {
-    position: fixed;
-    background-color: #ffcccc; /* Light red background */
-    color: white;
-    font-size: 16px;
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    display: none; /* Hidden by default */
-    transition: background-color 0.3s, opacity 0.3s;
-}
-
-/* Hover effect */
-#logout-btn:hover {
-    background-color: #ff9999; /* Darker red on hover */
-}
-
-/* Bottom-right corner */
-#logout-btn.bottom-right {
-    bottom: 20px;
-    right: 20px;
-}
-
-
-#expense-container {
-    padding-top: 40px; /* Space for the logout button */
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
-    /* For smaller screens */
-    #logout-btn {
-        top: 10px; /* Adjust top position */
-        right: 10px; /* Adjust right position */
-        font-size: 14px; /* Smaller text */
-    }
-
     #expense-container {
         padding: 10px; /* Reduce padding on small screens */
     }
 
     button {
-        width: 60%; /* Make buttons full-width */
+        width: 60%; /* Buttons slightly smaller */
+    }
+
+    .action-btn {
+        font-size: 10px; /* Smaller font size for smaller screens */
     }
 }
