@@ -101,11 +101,13 @@ button:hover {
 }
 
 /* Footer */
+/* Footer */
 #footer {
+    max-width: 900px; /* Same max-width as #expense-container */
+    margin: 30px auto 0 auto; /* Centers the footer and adds margin from the top */
     text-align: center;
     font-size: 14px;
     color: #888;
-    margin-top: 30px;
     padding: 20px 0; /* Adds space inside the footer */
     background-color: #f1f1f1; /* Background color for the footer */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow for a 'box' effect */
