@@ -3,18 +3,17 @@ body {
     font-family: 'Roboto', sans-serif;
     background-color: #f4f4f9;
     color: #333;
-    margin: 20px;
-    padding: 20px;
+    margin: 0px;
+    padding: 0px;
 }
 
 #expense-container {
     max-width: 900px;
-    margin: 30px auto;
-    padding: 30px;
+    margin: 20px auto;
+    padding: 20px;
     background-color: #fff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    position: relative; /* To position logout button */
 }
 
 h1 {
@@ -69,7 +68,6 @@ footer {
     margin-top: 30px;
 }
 
-/* Styling for the Logout Button */
 /* Logout Button - Only for Dashboard */
 #logoutButton {
     background-color: #ffcccc;
