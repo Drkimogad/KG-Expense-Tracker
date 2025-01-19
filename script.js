@@ -96,9 +96,9 @@ function showDashboard() {
     currentUser = getLoggedInUser();
     const content = document.getElementById('content');
     content.innerHTML = `
-        <h1>Welcome, ${currentUser.email} to your</h1>
-        <h2>Expense Tracker</h2>
-        
+        <h1>KG Expense Tracker</h1>
+        <h2>Welcome to your dashboard, ${currentUser.email}</h2>
+          
         <!-- Add Expense Form -->
         <form id="expenseForm">
             <input type="text" id="expenseName" placeholder="Expense Name" required>
