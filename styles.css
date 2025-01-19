@@ -62,28 +62,6 @@ button:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-
-/* Ensure the logout button is initially visible or toggle visibility with JS */
-#logout-btn {
-    position: fixed;
-    background-color: #ffcccc; /* Light red background */
-    color: white;
-    font-size: 16px;
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    z-index: 1000; /* Ensure it stays on top */
-    bottom: 20px;
-    right: 20px; /* Position in bottom-right corner */
-    transition: background-color 0.3s, opacity 0.3s;
-    opacity: 1; /* Ensure the button is visible */
-}
-
-/* Hover effect */
-#logout-btn:hover {
-    background-color: #ff9999; /* Darker red on hover */
-
 #footer {
     text-align: center;
     font-size: 14px;
