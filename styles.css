@@ -46,7 +46,12 @@ button:hover {
     background-color: #45a049;
 }
 
-/* Expense Item Styling */
+#expense-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .expense-item {
     display: flex;
     justify-content: space-between;
@@ -55,78 +60,59 @@ button:hover {
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 10px;
 }
 
-.expense-info {
-    flex: 3;
+footer {
+    text-align: center;
     font-size: 14px;
+    color: #888;
+    margin-top: 30px;
 }
 
-.expense-buttons {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-}
-
-.edit-btn, .delete-btn {
-    padding: 6px 10px;
-    font-size: 14px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.edit-btn {
-    background-color: #4CAF50;
-    color: white;
-}
-
-.edit-btn:hover {
-    background-color: #45a049;
-}
-
-.delete-btn {
-    background-color: #ff6666;
-    color: white;
-}
-
-.delete-btn:hover {
-    background-color: #ff4d4d;
-}
-
-/* Styling for the Logout Button (Only for bottom right corner) */
+/* Styling for the Logout Button */
 #logout-btn {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #ffcccc;
+    background-color: #ffcccc; /* Light red background */
     color: white;
     font-size: 16px;
     padding: 10px 20px;
     border-radius: 5px;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s;
-    display: block; /* Make sure it's visible */
+    display: none; /* Hidden by default */
+    transition: background-color 0.3s, opacity 0.3s;
 }
 
+/* Hover effect */
 #logout-btn:hover {
-    background-color: #ff9999;
+    background-color: #ff9999; /* Darker red on hover */
+}
+
+/* Bottom-right corner */
+#logout-btn.bottom-right {
+    bottom: 20px;
+    right: 20px;
+}
+
+
+#expense-container {
+    padding-top: 40px; /* Space for the logout button */
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    /* For smaller screens */
+    #logout-btn {
+        top: 10px; /* Adjust top position */
+        right: 10px; /* Adjust right position */
+        font-size: 14px; /* Smaller text */
+    }
+
     #expense-container {
-        padding: 10px;
+        padding: 10px; /* Reduce padding on small screens */
     }
 
     button {
-        width: 100%;
-    }
-
-    .expense-buttons {
-        flex-direction: column;
-        gap: 5px;
+        width: 60%; /* Make buttons full-width */
     }
 }
