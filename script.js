@@ -139,19 +139,14 @@ function showDashboard() {
         <!-- Logout Button -->
         <button id="logoutButton" onclick="logout()">Log Out</button>
     `;
-    // Ensure proper placement above footer
-    const footer = document.querySelector('footer');
-    const logoutButton = document.getElementById('logoutButton');
-    footer.parentNode.insertBefore(logoutButton, footer);
-}
 
 // UPDATED: Reposition logout button above footer
-const footer = document.querySelector('footer');
-const logoutButton = document.getElementById('logoutButton');
-if (footer && logoutButton) {
-    footer.parentNode.insertBefore(logoutButton, footer);
+      const footer = document.querySelector('footer');
+      const logoutButton = document.getElementById('logoutButton');
+      if (footer && logoutButton) {
+      footer.parentNode.insertBefore(logoutButton, footer);
 }
-toggleLogoutButton(true);
+     toggleLogoutButton(true);
 
 
     // Display saved expenses
