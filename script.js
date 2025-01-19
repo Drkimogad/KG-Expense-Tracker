@@ -135,14 +135,16 @@ function showDashboard() {
 
         <!-- Export Button -->
         <button onclick="exportExpenses()">Export Expenses as CSV</button>
+
+        <!-- Logout Button -->
         <button id="logoutButton" onclick="logout()">Log Out</button>
     `;
 
     // UPDATED: Show and reposition logout button
     const logoutButton = document.getElementById('logoutButton');
     logoutButton.style.position = 'fixed';
-    logoutButton.style.top = '10px'; // Adjust this for top-right corner
-    logoutButton.style.right = '10px'; // Adjust this for right corner
+    logoutButton.style.bottom = '20px'; // Adjust this for top-right corner
+    logoutButton.style.right = '20px'; // Adjust this for right corner
     toggleLogoutButton(true);
 
     // Display saved expenses
