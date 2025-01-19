@@ -1,4 +1,4 @@
-const CACHE_NAME = 'PetStudio-cache-v1'; // Update cache version
+const CACHE_NAME = 'KG-Expense-Tracker-cache-v1'; // Update cache version
 const urlsToCache = [
     'https://drkimogad.github.io/KG-Expense-Tracker/',                // Main page URL
     'https://drkimogad.github.io/KG-Expense-Tracker/index.html',      // Ensure main HTML page is cached
