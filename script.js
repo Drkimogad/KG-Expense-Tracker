@@ -97,7 +97,7 @@ function showDashboard() {
     const content = document.getElementById('content');
     content.innerHTML = `
         <h1>KG Expense Tracker</h1>
-        <h2>Welcome to your dashboard, ${currentUser.email}</h2>
+        <h3>Welcome to your dashboard, ${currentUser.email}</h3>
           
         <!-- Add Expense Form -->
         <form id="expenseForm">
