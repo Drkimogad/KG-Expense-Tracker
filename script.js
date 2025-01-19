@@ -139,7 +139,11 @@ function showDashboard() {
         <!-- Logout Button -->
         <button id="logoutButton" onclick="logout()">Log Out</button>
     `;
-
+    // Ensure proper placement above footer
+    const footer = document.querySelector('footer');
+    const logoutButton = document.getElementById('logoutButton');
+    footer.parentNode.insertBefore(logoutButton, footer);
+}
     // UPDATED: Show and reposition logout button
     const logoutButton = document.getElementById('logoutButton');
     logoutButton.style.position = 'fixed';
