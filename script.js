@@ -96,8 +96,7 @@ function showDashboard() {
     currentUser = getLoggedInUser();
     const content = document.getElementById('content');
     content.innerHTML = `
-        <h1>Welcome, ${currentUser.email}</h1>
-        <button id="logoutButton" onclick="logout()">Log Out</button>
+        <h1>Welcome, ${currentUser.email} to your</h1>
         <h2>Expense Tracker</h2>
         
         <!-- Add Expense Form -->
@@ -136,6 +135,7 @@ function showDashboard() {
 
         <!-- Export Button -->
         <button onclick="exportExpenses()">Export Expenses as CSV</button>
+        <button id="logoutButton" onclick="logout()">Log Out</button>
     `;
 
     // UPDATED: Show and reposition logout button
