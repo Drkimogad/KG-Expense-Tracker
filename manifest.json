@@ -1,6 +1,6 @@
 {
   "name": "KG-Expense-Tracker",
-  "short_name": "PetTracker",
+  "short_name": "ExpenseTracker",
   "description": "A simple App that allows you to track your expenses and control your budget effeciently",
   "start_url": "https://drkimogad.github.io/KG-Expense-Tracker/index.html",
   "display": "standalone",
