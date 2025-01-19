@@ -73,6 +73,35 @@ button:hover {
     padding-top: 40px; /* Space for the logout button */
 }
 
+/* Logout button styling */
+#logoutButton {
+    background-color: red;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 20px; /* Ensure space between button and footer */
+    display: block; /* Ensure visibility */
+    width: auto; /* Adjust width to content */
+    position: relative; /* Keep it above footer */
+}
+
+#logoutButton:hover {
+    background-color: darkred;
+}
+
+/* Styling for delete and edit buttons under saved expenses */
+.expense-item button {
+    width: 20%; /* Each button occupies 20% of the space */
+    margin: 5px; /* Add spacing between buttons */
+    padding: 10px; /* Adjust padding for better clickability */
+    font-size: 14px; /* Adjust font size for consistency */
+    display: inline-block; /* Align buttons on the same line */
+    text-align: center;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     /* For smaller screens */
