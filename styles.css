@@ -82,9 +82,9 @@ button:hover {
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
-    margin-bottom: 20px; /* Ensure space between button and footer */
-    display: block; /* Ensure visibility */
-    width: auto; /* Adjust width to content */
+    margin-bottom: 20px; /* Space between button and footer */
+    display: block;
+    width: auto;
     position: relative; /* Keep it above footer */
 }
 
