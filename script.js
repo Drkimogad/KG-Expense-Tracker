@@ -22,7 +22,7 @@ function toggleLogoutButton(show) {
 function showSignUp() {
     const content = document.getElementById('content');
     content.innerHTML = `
-        <h1>Sign Up</h1>
+        <h1>KG ExpenseTracker</h1>
         <form id="signUpForm">
             <label for="newEmail">Email:</label>
             <input type="email" id="newEmail" required>
@@ -55,7 +55,7 @@ function showSignUp() {
 function showSignIn() {
     const content = document.getElementById('content');
     content.innerHTML = `
-        <h1>Sign In</h1>
+        <h1>KG ExpenseTracker</h1>
         <form id="signInForm">
             <label for="email">Email:</label>
             <input type="email" id="email" required>
@@ -97,7 +97,7 @@ function showDashboard() {
     const content = document.getElementById('content');
     content.innerHTML = `
         <h1>KG Expense Tracker</h1>
-        <h3>Welcome to your dashboard, ${currentUser.email}</h3>
+        <h2>Welcome to your dashboard, ${currentUser.email}</h2>
           
         <!-- Add Expense Form -->
         <form id="expenseForm">
