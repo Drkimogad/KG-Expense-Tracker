@@ -7,29 +7,6 @@ body {
     padding: 0;
 }
 
-/* Styling for the Logout Button */
-/* Ensure the logout button is initially visible or toggle visibility with JS */
-#logout-btn {
-    position: fixed;
-    background-color: #ffcccc; /* Light red background */
-    color: white;
-    font-size: 16px;
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    z-index: 1000; /* Ensure it stays on top */
-    bottom: 20px;
-    right: 20px; /* Position in bottom-right corner */
-    transition: background-color 0.3s, opacity 0.3s;
-    opacity: 1; /* Ensure the button is visible */
-}
-
-/* Hover effect */
-#logout-btn:hover {
-    background-color: #ff9999; /* Darker red on hover */
-}
-
 #expense-container {
     max-width: 900px;
     margin: 20px auto;
@@ -42,13 +19,13 @@ body {
 
 h1 {
     color: #4CAF50;
-    font-size: 30px;
+    font-size: 24px;
     text-align: center;
     margin-bottom: 20px;
 }
 
 input, select, button {
-    width: 30%;
+    width: 100%;
     padding: 12px;
     margin: 10px 0;
     border-radius: 5px;
@@ -85,22 +62,53 @@ button:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-footer {
-    text-align: center;
-    font-size: 18px;
-    color: #888;
-    margin-top: 30px;
+
+/* Ensure the logout button is initially visible or toggle visibility with JS */
+#logout-btn {
+    position: fixed;
+    background-color: #ffcccc; /* Light red background */
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    z-index: 1000; /* Ensure it stays on top */
+    bottom: 20px;
+    right: 20px; /* Position in bottom-right corner */
+    transition: background-color 0.3s, opacity 0.3s;
+    opacity: 1; /* Ensure the button is visible */
 }
 
+/* Hover effect */
+#logout-btn:hover {
+    background-color: #ff9999; /* Darker red on hover */
+
+#footer {
+    text-align: center;
+    font-size: 14px;
+    color: #888;
+    margin-top: 30px;
+}   
+    
 #expense-container {
     padding-top: 40px; /* Space for the logout button */
 }
 
-/* Responsive Design Adjustments */
+/* Responsive Design */
 @media (max-width: 768px) {
+    /* For smaller screens */
     #logout-btn {
-        font-size: 14px; /* Smaller text */
-        bottom: 10px; /* Adjust bottom position */
+        top: 10px; /* Adjust top position */
         right: 10px; /* Adjust right position */
+        font-size: 14px; /* Smaller text */
+    }
+
+    #expense-container {
+        padding: 10px; /* Reduce padding on small screens */
+    }
+
+    button {
+        width: 100%; /* Make buttons full-width */
     }
 }
