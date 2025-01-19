@@ -144,12 +144,15 @@ function showDashboard() {
     const logoutButton = document.getElementById('logoutButton');
     footer.parentNode.insertBefore(logoutButton, footer);
 }
-    // UPDATED: Show and reposition logout button
-    const logoutButton = document.getElementById('logoutButton');
-    logoutButton.style.position = 'fixed';
-    logoutButton.style.bottom = '20px'; // Adjust this for top-right corner
-    logoutButton.style.right = '20px'; // Adjust this for right corner
-    toggleLogoutButton(true);
+
+// UPDATED: Reposition logout button above footer
+const footer = document.querySelector('footer');
+const logoutButton = document.getElementById('logoutButton');
+if (footer && logoutButton) {
+    footer.parentNode.insertBefore(logoutButton, footer);
+}
+toggleLogoutButton(true);
+
 
     // Display saved expenses
     renderExpenseList();
