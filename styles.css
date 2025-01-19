@@ -14,14 +14,18 @@ body {
     background-color: #fff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    position: relative; /* To position logout button */
+    position: relative; /* For positioning logout button */
 }
 
 h1 {
-    color: #4CAF50;
+    color: white;
     font-size: 24px;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px; /* Add extra spacing */
+    background-color: #4CAF50;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 input, select, button {
@@ -46,33 +50,6 @@ button:hover {
     background-color: #45a049;
 }
 
-#expense-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.expense-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-#footer {
-    text-align: center;
-    font-size: 14px;
-    color: #888;
-    margin-top: 30px;
-}   
-    
-#expense-container {
-    padding-top: 40px; /* Space for the logout button */
-}
-
 /* Logout button styling */
 #logoutButton {
     background-color: red;
@@ -82,40 +59,71 @@ button:hover {
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
-    margin-bottom: 20px; /* Space between button and footer */
     display: block;
-    width: auto;
-    position: relative; /* Keep it above footer */
+    margin: 0 auto 30px; /* Center button and add spacing below */
+    width: fit-content;
 }
 
 #logoutButton:hover {
     background-color: darkred;
 }
 
-/* Styling for delete and edit buttons under saved expenses */
+/* Expense List */
+#expense-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.expense-item {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    gap: 10px; /* Add spacing between buttons */
+}
+
 .expense-item button {
-    width: 20%; /* Each button occupies 20% of the space */
-    margin: 5px; /* Add spacing between buttons */
-    padding: 10px; /* Adjust padding for better clickability */
-    font-size: 14px; /* Adjust font size for consistency */
-    display: inline-block; /* Align buttons on the same line */
+    flex: 1 1 calc(50% - 10px); /* Two buttons per row on smaller screens */
+    margin: 0; /* Remove margin for better alignment */
+    padding: 10px;
+    font-size: 14px;
     text-align: center;
+    transition: background-color 0.3s;
+}
+
+.expense-item button:hover {
+    background-color: #e0e0e0;
+}
+
+/* Footer */
+#footer {
+    text-align: center;
+    font-size: 14px;
+    color: #888;
+    margin-top: 30px;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    /* For smaller screens */
-    #logout-btn {
-        top: 10px; /* Adjust top position */
-        right: 10px; /* Adjust right position */
-        font-size: 14px; /* Smaller text */
+    #expense-container {
+        padding: 10px;
     }
 
-    #expense-container {
-        padding: 10px; /* Reduce padding on small screens */
+    h1 {
+        font-size: 20px; /* Smaller header font */
     }
 
     button {
         width: 100%; /* Make buttons full-width */
+    }
+
+    .expense-item button {
+        flex: 1 1 100%; /* Buttons take full width on small screens */
+        margin-bottom: 10px; /* Add spacing between buttons */
     }
 }
