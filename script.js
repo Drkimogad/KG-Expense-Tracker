@@ -178,11 +178,32 @@ function renderExpenseList() {
 
     expenses.forEach((expense, index) => {
         const li = document.createElement('li');
-        li.innerHTML = `
-            <strong>${expense.name}</strong> - ${getCurrencySymbol(expense.currency)} ${expense.amount} - ${expense.category} 
-            <button onclick="deleteExpense(${index})">Delete</button>
-            <button onclick="editExpense(${index})">Edit</button>
+        li.classList.add('expense-item'); // Ensure it matches CSS
+
+        const detailsDiv = document.createElement('div');
+        detailsDiv.classList.add('expense-details'); // Added class for styling
+        detailsDiv.innerHTML = `
+            <strong>${expense.name}</strong> - ${getCurrencySymbol(expense.currency)} ${expense.amount} - ${expense.category}
         `;
+
+        const actionsDiv = document.createElement('div');
+        actionsDiv.classList.add('action-buttons'); // Added class for styling
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.classList.add('delete-button'); // Optional for specific styling
+        deleteButton.onclick = () => deleteExpense(index);
+
+        const editButton = document.createElement('button');
+        editButton.textContent = 'Edit';
+        editButton.classList.add('edit-button'); // Optional for specific styling
+        editButton.onclick = () => editExpense(index);
+
+        actionsDiv.appendChild(editButton);
+        actionsDiv.appendChild(deleteButton);
+
+        li.appendChild(detailsDiv);
+        li.appendChild(actionsDiv); // Ensure buttons are grouped below details
         expenseList.appendChild(li);
     });
 }
