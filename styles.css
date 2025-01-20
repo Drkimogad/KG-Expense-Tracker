@@ -75,21 +75,27 @@ button:hover {
     gap: 10px;
 }
 
+/* Updated Expense Item: Ensure buttons align on the same line */
+/* START UPDATED PART */
 .expense-item {
     display: flex;
-    flex-wrap: wrap; /* Allow wrapping for smaller screens */
-    justify-content: space-between;
-    align-items: center;
+    justify-content: space-between; /* Space between expense details and buttons */
+    align-items: center; /* Align items vertically */
     background-color: #f9f9f9;
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    gap: 10px; /* Add spacing between buttons */
+    gap: 15px; /* Add spacing between elements */
+}
+
+.expense-item .details {
+    flex: 3; /* Allocate more space to the expense details */
+    text-align: left; /* Align expense details to the left */
 }
 
 .expense-item button {
-    flex: 1 1 calc(50% - 10px); /* Two buttons per row on smaller screens */
-    margin: 0; /* Remove margin for better alignment */
+    flex: 0 0 auto; /* Prevent buttons from resizing */
+    margin-left: 10px; /* Add spacing between buttons */
     padding: 10px;
     font-size: 14px;
     text-align: center;
@@ -99,8 +105,8 @@ button:hover {
 .expense-item button:hover {
     background-color: #e0e0e0;
 }
+/* END UPDATED PART */
 
-/* Footer */
 /* Footer */
 #footer {
     max-width: 900px; /* Same max-width as #expense-container */
@@ -111,6 +117,10 @@ button:hover {
     padding: 20px 0; /* Adds space inside the footer */
     background-color: #f1f1f1; /* Background color for the footer */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow for a 'box' effect */
+    width: 100%; /* Ensure the footer spans the full width */
+    /* START UPDATED PART */
+    text-align: center; /* Center the text */
+    /* END UPDATED PART */
 }
 
 /* Responsive Design */
